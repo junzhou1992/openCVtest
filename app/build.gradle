@@ -10,6 +10,13 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+
+        ndk {
+            moduleName"detection_based_tracker"
+            abiFilters  "armeabi-v7a"
+
+        }
     }
     buildTypes {
         release {
@@ -17,6 +24,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets.main {
+        jni.srcDirs = ['libs']
+    }
+
+
+
 }
 
 dependencies {
@@ -40,3 +54,4 @@ task nativeLibsToJar(type: Jar, description: 'create a jar archive of the native
 tasks.withType(JavaCompile) {
     compileTask -> compileTask.dependsOn(nativeLibsToJar)
 }
+
